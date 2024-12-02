@@ -1,0 +1,1271 @@
+fileFormatVersion: 2
+guid: bb13ba16fe4006c4e9b2284efd358d49
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36bd959bde86f1446af8cc2f984bbe3e
+      internalID: -645850499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_1
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf409ec538a81542bcb980407606f2b
+      internalID: -1453078373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_2
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 079ee61003542ef40a015ee82280f08d
+      internalID: 1737614978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_3
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0c9c3c258a26f74c84c343b6df946fe
+      internalID: -1193701978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_4
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f104d3c6c28045c4284cac9182d8a7ac
+      internalID: -1938298411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_5
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a8f212c48a9150499cdb807af4cd16c
+      internalID: 1848326217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_6
+      rect:
+        serializedVersion: 2
+        x: 1899
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0c08d3dd368edc4091de02bb1bc05aa
+      internalID: 539104613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_7
+      rect:
+        serializedVersion: 2
+        x: 2213
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89b3b7064856ef743a177076d9cad162
+      internalID: 1223000318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_8
+      rect:
+        serializedVersion: 2
+        x: 2527
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b2049c6937a025478a178999481168c
+      internalID: 1694004709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_9
+      rect:
+        serializedVersion: 2
+        x: 2841
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0dd0d58f714d4b44a13064b89816839
+      internalID: 482734533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_10
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f66e0f655aeb624fa65e263ffdcb53c
+      internalID: 1898459721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_11
+      rect:
+        serializedVersion: 2
+        x: 3469
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5964cc2e84d79264fa6aabbe99ffb45e
+      internalID: -919948229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_12
+      rect:
+        serializedVersion: 2
+        x: 3783
+        y: 1387
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d8d6f549c3449340b35d52b7536d6aa
+      internalID: 148748936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_13
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6687c7d91754a904bb9a980b659cb5f3
+      internalID: -1083177058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_14
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 139498e2c0b7c5d4e860a60861e496fe
+      internalID: 1612125953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_15
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 190dc20a178f0a94fbe82a3f0e945f8d
+      internalID: 2130778439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_16
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0730b4cf4b00fc44eb666a993da6f8df
+      internalID: 2062514385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_17
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13c3e32407fb7c14983d43d3ff975460
+      internalID: -365815969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_18
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e00e859479d9964b9759adf9589e179
+      internalID: -2110876470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_19
+      rect:
+        serializedVersion: 2
+        x: 1899
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3857931ba7283341b4bfd39dc03efb2
+      internalID: 533280696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_20
+      rect:
+        serializedVersion: 2
+        x: 2213
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd9d7e7573506964d88f0e0d3161d941
+      internalID: -633395732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_21
+      rect:
+        serializedVersion: 2
+        x: 2527
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36e338db1850c5341a5e6838c5d64a53
+      internalID: -2130766337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_22
+      rect:
+        serializedVersion: 2
+        x: 2841
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1d4501fe8b99164f94ddb370a0a9026
+      internalID: 130470330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_23
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1739c49370e06a344940c265b413dfce
+      internalID: 1343524453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_24
+      rect:
+        serializedVersion: 2
+        x: 3469
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b74e65ff0bd7f7448bc631859f4b7d7e
+      internalID: -2132437050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_25
+      rect:
+        serializedVersion: 2
+        x: 3783
+        y: 932
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a23d00fd348fa994dba665362a52e0e8
+      internalID: 1838263090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_26
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b328d64f12d9bac41a12f82352de21ed
+      internalID: -433792354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_27
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 953cf0fe64d422949912ee11b76baa35
+      internalID: 809556765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_28
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f52763115246314ea4ea2d228f14289
+      internalID: -1847750427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_29
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fc4010fa6707f245b1020c79804652b
+      internalID: -602638991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_30
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d80ed9c12b51d5941bc4db0f2d32149c
+      internalID: 1480509764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_31
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a91a8d8beec80ea46a53665973ce82ba
+      internalID: -1165013867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_32
+      rect:
+        serializedVersion: 2
+        x: 1899
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4df0041afb70a44d883fe4a6946f8fd
+      internalID: -820659292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_33
+      rect:
+        serializedVersion: 2
+        x: 2213
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d284ee22844cf48bc8c76270a0b5ec
+      internalID: 51066084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_34
+      rect:
+        serializedVersion: 2
+        x: 2527
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f99bb34df55b604cb7320d8d856633a
+      internalID: 1602375767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_35
+      rect:
+        serializedVersion: 2
+        x: 2841
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94760f1db0965e24f92c9ff6897dbc43
+      internalID: 2136289917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_36
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de18c4bd9e47ac14ab90ace0b22ea62c
+      internalID: -1997037895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_37
+      rect:
+        serializedVersion: 2
+        x: 3469
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2793bf9ab7f21aa45825a008904fe567
+      internalID: -141153647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_38
+      rect:
+        serializedVersion: 2
+        x: 3783
+        y: 477
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e61735d5eb7b5d4a909c590ddbc6238
+      internalID: 1367582615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_39
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d30843028eb892d4fa251697a9f78878
+      internalID: 1044444144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_40
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 009272bc353e2224d8705c0afd8913ff
+      internalID: -361994707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_41
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff9d8785742c7644b9a8c6c2bd657db8
+      internalID: -1809889432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_42
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f53dfff764d1d441a7ef8ae2a721c8d
+      internalID: 1232319645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_43
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe8dc0bb701933242a86081de25dacc8
+      internalID: 1338022736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_44
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d733e03dba5b154b8b77c2e1c48f694
+      internalID: -103089034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_45
+      rect:
+        serializedVersion: 2
+        x: 1899
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cbabf941d9a0c54186dfeed7c9016d0
+      internalID: 638879446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_46
+      rect:
+        serializedVersion: 2
+        x: 2213
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7382a74ed3f9b874eba88317d8672e17
+      internalID: -1567702067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_47
+      rect:
+        serializedVersion: 2
+        x: 2527
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1998b31e362e34d8b320e1257a3dc2
+      internalID: -2108684397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_48
+      rect:
+        serializedVersion: 2
+        x: 2841
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a0c44f88da9c244e908f38c43d8746d
+      internalID: 962076590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_49
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1471dd14b5ff01849a7abe25ccc55683
+      internalID: 1572656263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_50
+      rect:
+        serializedVersion: 2
+        x: 3469
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e68e98e54ecc6a3409c006873db39dae
+      internalID: 964896321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAndTables_Base_color_51
+      rect:
+        serializedVersion: 2
+        x: 3783
+        y: 22
+        width: 290
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b58425d2c4a3dd6468b73a22e331b658
+      internalID: -1433292605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      CardsAndTables_Base_color_0: -645850499
+      CardsAndTables_Base_color_1: -1453078373
+      CardsAndTables_Base_color_10: 1898459721
+      CardsAndTables_Base_color_11: -919948229
+      CardsAndTables_Base_color_12: 148748936
+      CardsAndTables_Base_color_13: -1083177058
+      CardsAndTables_Base_color_14: 1612125953
+      CardsAndTables_Base_color_15: 2130778439
+      CardsAndTables_Base_color_16: 2062514385
+      CardsAndTables_Base_color_17: -365815969
+      CardsAndTables_Base_color_18: -2110876470
+      CardsAndTables_Base_color_19: 533280696
+      CardsAndTables_Base_color_2: 1737614978
+      CardsAndTables_Base_color_20: -633395732
+      CardsAndTables_Base_color_21: -2130766337
+      CardsAndTables_Base_color_22: 130470330
+      CardsAndTables_Base_color_23: 1343524453
+      CardsAndTables_Base_color_24: -2132437050
+      CardsAndTables_Base_color_25: 1838263090
+      CardsAndTables_Base_color_26: -433792354
+      CardsAndTables_Base_color_27: 809556765
+      CardsAndTables_Base_color_28: -1847750427
+      CardsAndTables_Base_color_29: -602638991
+      CardsAndTables_Base_color_3: -1193701978
+      CardsAndTables_Base_color_30: 1480509764
+      CardsAndTables_Base_color_31: -1165013867
+      CardsAndTables_Base_color_32: -820659292
+      CardsAndTables_Base_color_33: 51066084
+      CardsAndTables_Base_color_34: 1602375767
+      CardsAndTables_Base_color_35: 2136289917
+      CardsAndTables_Base_color_36: -1997037895
+      CardsAndTables_Base_color_37: -141153647
+      CardsAndTables_Base_color_38: 1367582615
+      CardsAndTables_Base_color_39: 1044444144
+      CardsAndTables_Base_color_4: -1938298411
+      CardsAndTables_Base_color_40: -361994707
+      CardsAndTables_Base_color_41: -1809889432
+      CardsAndTables_Base_color_42: 1232319645
+      CardsAndTables_Base_color_43: 1338022736
+      CardsAndTables_Base_color_44: -103089034
+      CardsAndTables_Base_color_45: 638879446
+      CardsAndTables_Base_color_46: -1567702067
+      CardsAndTables_Base_color_47: -2108684397
+      CardsAndTables_Base_color_48: 962076590
+      CardsAndTables_Base_color_49: 1572656263
+      CardsAndTables_Base_color_5: 1848326217
+      CardsAndTables_Base_color_50: 964896321
+      CardsAndTables_Base_color_51: -1433292605
+      CardsAndTables_Base_color_6: 539104613
+      CardsAndTables_Base_color_7: 1223000318
+      CardsAndTables_Base_color_8: 1694004709
+      CardsAndTables_Base_color_9: 482734533
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
