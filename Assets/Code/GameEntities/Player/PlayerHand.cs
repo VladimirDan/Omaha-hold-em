@@ -3,24 +3,26 @@ using UnityEngine;
 using Code.Enums;
 using Code.View;
 
-namespace Code.GameEntities
+namespace Code.GameEntities.Player
 {
     public class PlayerHand : MonoBehaviour
     {
         [SerializeField] public CardSet cardSet;
-        private int playerHandCardsCount = 4;
+        private int playerHandCardsCount = 5;
+        [SerializeField] private bool isSecret;
 
         [SerializeField] public CardsView cardsView;
         
         public void Initialize()
         {
             cardSet = new CardSet(playerHandCardsCount);
+            cardsView.UpdateCardsView(cardSet.Cards, false);
         }
 
         public void AddCard(Card card)
         {
             cardSet.AddCard(card);
-            cardsView.UpdateCardsView(cardSet.Cards);
+            cardsView.UpdateCardsView(cardSet.Cards, isSecret);
         }
         
         public List<(Card, Card)> GetHandCombinations()

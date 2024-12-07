@@ -63,6 +63,9 @@ namespace Code.View
         [SerializeField] private Sprite queenOfSpades;
         [SerializeField] private Sprite kingOfSpades;
 
+        [Header("Card Back")]
+        [SerializeField] private Sprite cardBack;  
+
         public Sprite GetSprite(CardSuit suit, CardRank rank)
         {
             switch (suit)
@@ -142,6 +145,11 @@ namespace Code.View
                 default:
                     return null;
             }
+        }
+
+        public Sprite GetCardBack()
+        {
+            return cardBack; 
         }
     }
 }

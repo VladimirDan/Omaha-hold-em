@@ -64,3 +64,4 @@ MonoBehaviour:
   jackOfSpades: {fileID: 1898459721, guid: bb13ba16fe4006c4e9b2284efd358d49, type: 3}
   queenOfSpades: {fileID: -919948229, guid: bb13ba16fe4006c4e9b2284efd358d49, type: 3}
   kingOfSpades: {fileID: 148748936, guid: bb13ba16fe4006c4e9b2284efd358d49, type: 3}
+  cardBack: {fileID: 21300000, guid: aebca0ef63c71e943a4c64a31dd11c28, type: 3}
