@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Code.Enums;
 using Code.View;
@@ -17,6 +18,13 @@ namespace Code.GameEntities.Player
         {
             cardSet = new CardSet(playerHandCardsCount);
             cardsView.UpdateCardsView(cardSet.Cards, false);
+        }
+
+        public void Reset()
+        {
+            cardSet.Reset();
+            cardsView.UpdateCardsView(cardSet.Cards, false);
+            cardsView.ResetCardsColorAndTransparency();
         }
 
         public void AddCard(Card card)

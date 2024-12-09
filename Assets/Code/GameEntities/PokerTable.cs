@@ -9,20 +9,23 @@ namespace Code.GameEntities
 {
     public class PokerTable : MonoBehaviour
     {
-        [SerializeField] public CardSet cardSet;
-        private int communityCardsCount = 5;
+        [SerializeField] public CardSet communityCards;
+        private int communityCardsMaxCount = 5;
         public int pot = 0;
         [SerializeField] public ChipsManager currentBet;
         public List<PlayerModel> playersInGame;
+        public List<PlayerModel> players;
         
         [SerializeField] public CardsView cardsView;
 
-        public Dictionary<PlayerModel, ChipsManager> playerBets = new Dictionary<PlayerModel, ChipsManager>();
+        public Dictionary<PlayerModel, ChipsManager> playersBets = new Dictionary<PlayerModel, ChipsManager>();
+        public Dictionary<PlayerModel, List<Card>> playersCombinations = new Dictionary<PlayerModel, List<Card>>();
 
         public void Initialize(List<PlayerModel> players)
         {
-            cardSet = new CardSet(communityCardsCount);
-            cardsView.UpdateCardsView(cardSet.Cards, false);
+            communityCards = new CardSet(communityCardsMaxCount);
+            cardsView.UpdateCardsView(communityCards.Cards, false);
+            this.players = players;
             playersInGame = new List<PlayerModel>();
             foreach (var player in players)
             {
@@ -32,32 +35,55 @@ namespace Code.GameEntities
             InitializePlayerBets();
             currentBet.Initialize();
         }
+
+        public void Reset()
+        {
+            communityCards.Reset();
+            cardsView.UpdateCardsView(communityCards.Cards, false);
+            cardsView.ResetCardsColorAndTransparency();
+            playersInGame.Clear();
+            foreach (var player in players)
+            {
+                player.Reset();
+                playersInGame.Add(player);
+            }
+            currentBet.Reset();
+        }
         
         public void InitializePlayerBets()
         {
-            playerBets.Clear();
+            playersBets.Clear();
             
             if (playersInGame.Count == 0) return;
 
             for (int i = 0; i < playersInGame.Count; i++)
             {
                 var player = playersInGame[i];
-                playerBets[player] = playersInGame[i].betChipsManager;
-                playerBets[player].Initialize();
+                playersBets[player] = playersInGame[i].betChipsManager;
+                playersBets[player].Initialize();
             }
+        }
+        
+        public void ResetPlayerBets()
+        {
+            foreach (var playerBet in playersBets)
+            {
+                playerBet.Value.Reset();
+            }
+            currentBet.Reset();
         }
         
         public void AddCard(Card card)
         {
-            cardSet.AddCard(card);
-            cardsView.UpdateCardsView(cardSet.Cards, false);
+            communityCards.AddCard(card);
+            cardsView.UpdateCardsView(communityCards.Cards, false);
         }
         
         public void SetPlayerBet(PlayerModel player, int betAmount)
         {
-            if (playerBets.ContainsKey(player))
+            if (playersBets.ContainsKey(player))
             {
-                playerBets[player].TotalChips = betAmount;
+                playersBets[player].TotalChips = betAmount;
                 if (betAmount > currentBet.TotalChips)
                     currentBet.AddChips(betAmount - currentBet.TotalChips);
             }
@@ -69,9 +95,9 @@ namespace Code.GameEntities
 
         public int GetPlayerBet(PlayerModel player)
         {
-            if (playerBets.ContainsKey(player))
+            if (playersBets.ContainsKey(player))
             {
-                return playerBets[player].TotalChips;
+                return playersBets[player].TotalChips;
             }
             else
             {

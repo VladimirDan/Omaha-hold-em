@@ -6,20 +6,37 @@ namespace Code.GameEntities
     [System.Serializable]
     public class Card
     {
-        public CardSuit Suit { get; private set; }
-        public CardRank Rank { get; private set; }
+        public CardSuit suit;
+        public CardRank rank;
 
         public Card(CardSuit suit, CardRank rank)
         {
-            Suit = suit;
-            Rank = rank;
+            this.suit = suit;
+            this.rank = rank;
         }
-
-        public int Strength => (int)Rank;
-
+        
+        public Card(Card other)
+        {
+            this.suit = other.suit;
+            this.rank = other.rank;
+        }
+        
         public override string ToString()
         {
-            return $"{Rank} of {Suit} (Strength: {Strength})";
+            return $"{rank} of {suit}";
+        }
+        
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (obj.GetType() != typeof(Card)) return false;
+            Card otherCard = (Card)obj;
+            return this.suit == otherCard.suit && this.rank == otherCard.rank;
+        }
+        
+        public override int GetHashCode()
+        {
+            return (suit, rank).GetHashCode();
         }
     }
 }

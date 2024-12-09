@@ -29,6 +29,12 @@ namespace Code.GameEntities.Player
             UpdateChipsDisplay();
         }
         
+        public void Reset()
+        {
+            TotalChips = 0;
+            chipsView.UpdateChipsDisplay(totalChips);
+        }
+        
         public void AddChips(int amount)
         {
             if (amount <= 0)
@@ -79,11 +85,6 @@ namespace Code.GameEntities.Player
             {
                 Debug.LogWarning("ChipsView is not assigned.");
             }
-        }
-
-        public void ResetChipsManager()
-        {
-            TotalChips = 0;
         }
     }
 }

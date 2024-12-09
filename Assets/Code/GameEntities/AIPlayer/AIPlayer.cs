@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using Code.GameEntities.Player;
 using UnityEngine;
 using Code.Enums;
-using Unity.VisualScripting;
+using Code.GameLogic;
+using System.Collections.Generic;
+using System.Linq;
+using Code.GameEntities;
 
 namespace Code.GameEntities.AIPlayer
 {
     public class AIPlayer : MonoBehaviour
     {
         [SerializeField] private PlayerModel player;
+        private OmahaHandEvaluator omahaHandEvaluator = new OmahaHandEvaluator();
+        private int waitTime = 0;
 
         public void Initialize()
         {
             if (player != null && player.playerActionsManager != null)
             {
-                player.playerActionsManager.OnPlayerTurnChanged += OnPlayerTurn;
+                player.playerActionsManager.OnPlayerBetTurn += OnPlayerBetTurn;
+                player.playerActionsManager.OnCombinationRevealTurn += OnCombinationRevealTurn;
             }
         }
 
@@ -23,23 +29,27 @@ namespace Code.GameEntities.AIPlayer
         {
             if (player != null && player.playerActionsManager != null)
             {
-                player.playerActionsManager.OnPlayerTurnChanged -= OnPlayerTurn;
+                player.playerActionsManager.OnPlayerBetTurn -= OnPlayerBetTurn;
             }
         }
 
-        private void OnPlayerTurn(GameStage gameStage)
+        private void OnPlayerBetTurn(BetType betType)
         {
-            switch (gameStage)
+            switch (betType)
             {
-                case GameStage.SmallBlindBet:
+                case BetType.SmallBlindBet:
                     StartCoroutine(ActOnSBBlind());
                     break;
 
-                case GameStage.BigBlindBet:
+                case BetType.BigBlindBet:
                     StartCoroutine(ActOnSBBlind());
                     break;
 
-                case GameStage.RegularAction:
+                case BetType.RegularBet:
+                    StartCoroutine(ActOnSBBlind());
+                    break;
+
+                case BetType.NonRaiseBet:
                     StartCoroutine(ActOnSBBlind());
                     break;
 
@@ -49,13 +59,33 @@ namespace Code.GameEntities.AIPlayer
             }
         }
 
+        private void OnCombinationRevealTurn()
+        {
+            StartCoroutine(SubmitBestCombination());
+        }
+
+        public IEnumerator SubmitBestCombination()
+        {
+            yield return new WaitForSeconds(waitTime);
+            
+            player.playerActionsManager.cardSelectionController.selectedCards = FindBestCombination();
+            player.playerActionsManager.SubmitCombination(player);
+        }
+
+        public List<Card> FindBestCombination()
+        {
+            List<Card> tableCards = player.playerActionsManager.pokerTable.communityCards.Cards;
+            List<Card> playerCards = player.hand.cardSet.Cards;
+            return omahaHandEvaluator.FindBestOmahaCombinationCards(tableCards, playerCards);
+        }
+
         public IEnumerator ActOnSBBlind()
         {
-            yield return new WaitForSeconds(2);
-            
+            yield return new WaitForSeconds(waitTime);
+
             var pokerTable = player.playerActionsManager.pokerTable;
             int currentBet = pokerTable.currentBet.TotalChips;
-    
+
             if (pokerTable.GetPlayerBet(player) < currentBet)
             {
                 Debug.Log($"{player.name} делает call.");
@@ -66,7 +96,14 @@ namespace Code.GameEntities.AIPlayer
                 player.playerActionsManager.Check(player);
             }
 
-            Debug.Log($"{player.name} завершил свой ход.");
+            //Debug.Log($"{player.name} завершил свой ход.");
+        }
+
+        public IEnumerator AlwaysFold()
+        {
+            yield return new WaitForSeconds(waitTime);
+            
+            player.playerActionsManager.Fold(player);
         }
     }
 }

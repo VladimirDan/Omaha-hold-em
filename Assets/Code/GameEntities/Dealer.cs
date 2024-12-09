@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.GameEntities.Player;
 using UnityEngine;
 using Code.Enums;
 using System.Linq;
+using Code.GameRules;
+using Code.GameEntities.Pot;
 
 namespace Code.GameEntities
 {
@@ -11,6 +14,8 @@ namespace Code.GameEntities
         [SerializeField] private Deck deck;
         [SerializeField] public List<PlayerModel> players;
         [SerializeField] private PokerTable pokerTable;
+        private CombinationComparer combinationComparer;
+        private PotManager potManager;
         private int startingChips = 100;
 
         private PlayerModel smallBlindPlayer;
@@ -19,10 +24,18 @@ namespace Code.GameEntities
         public int smallBlindBet = 1;
         public int bigBlindBet = 2;
 
-        public void Initialize(List<PlayerModel> players)
+        public void Initialize(List<PlayerModel> players, CombinationComparer combinationComparer)
         {
             this.players = players;
+            this.combinationComparer = combinationComparer;
+            this.potManager = new PotManager(combinationComparer);
 
+            deck = new Deck();
+            deck.Shuffle();
+        }
+
+        public void Reset()
+        {
             deck = new Deck();
             deck.Shuffle();
         }
@@ -41,6 +54,8 @@ namespace Code.GameEntities
             {
                 for (int j = 0; j < 4; j++)
                 {
+                    Debug.Log(players[i].hand.cardSet.Cards.Count);
+                    Debug.Log("maxCardsCount = " + players[i].hand.cardSet.maxCardsCount);
                     players[i].hand.AddCard(deck.DrawCard());
                 }
                 //Debug.Log(playerHands[i].ToString());
@@ -81,25 +96,25 @@ namespace Code.GameEntities
             {
                 players[0].playerRoleManager.SetRole(PlayerRole.SmallBlind);
                 smallBlindPlayer = players[0];
-                
+
                 players[1].playerRoleManager.SetRole(PlayerRole.BigBlind);
                 bigBlindPlayer = players[1];
             }
         }
-        
+
         public void DistributeStartingChips()
         {
             foreach (var player in players)
             {
-                player.stackChipsManager.AddChips(startingChips); 
+                player.stackChipsManager.AddChips(startingChips);
             }
 
             Debug.Log($"Starting chips distributed: {startingChips} to each player.");
         }
-        
+
         public void DealFlop()
         {
-            List<Card> cardsList = pokerTable.cardSet.Cards;
+            List<Card> cardsList = pokerTable.communityCards.Cards;
             if (cardsList.Count > 0)
             {
                 Debug.LogError("Flop has already been dealt.");
@@ -114,7 +129,7 @@ namespace Code.GameEntities
 
         public void DealTurn()
         {
-            List<Card> cardsList = pokerTable.cardSet.Cards;
+            List<Card> cardsList = pokerTable.communityCards.Cards;
             if (cardsList.Count < 3)
             {
                 Debug.LogError("Cannot deal the Turn before the Flop.");
@@ -126,7 +141,7 @@ namespace Code.GameEntities
 
         public void DealRiver()
         {
-            List<Card> cardsList = pokerTable.cardSet.Cards;
+            List<Card> cardsList = pokerTable.communityCards.Cards;
             if (cardsList.Count < 4)
             {
                 Debug.LogError("Cannot deal the River before the Turn.");
@@ -134,6 +149,12 @@ namespace Code.GameEntities
             }
 
             pokerTable.AddCard(deck.DrawCard());
+        }
+
+        public void DistributePotChips()
+        {
+            potManager.DistributePotChips(players, pokerTable.playersBets, pokerTable.playersCombinations);
+            pokerTable.ResetPlayerBets();
         }
     }
 }

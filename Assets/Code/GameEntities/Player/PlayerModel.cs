@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using Code.Enums;
 using Code.View;
@@ -20,6 +21,13 @@ namespace Code.GameEntities.Player
         {
             stackChipsManager.Initialize();
             hand.Initialize();
+            playerActionsManager.Initialize(hand);
+        }
+
+        public void Reset()
+        {
+            playerActionsManager.Reset();
+            hand.Reset();
         }
     }
 }

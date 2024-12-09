@@ -17,6 +17,12 @@ namespace Code.GameEntities
             cards = new List<Card>(maxCardsCount);
         }
         
+        public CardSet(List<Card> cards, int maxCardsCount)
+        {
+            this.cards = cards;
+            this.maxCardsCount = maxCardsCount;
+        }
+        
         public void AddCard(Card card)
         {
             if (cards.Count >= maxCardsCount)
@@ -31,7 +37,12 @@ namespace Code.GameEntities
                 return;
             }
 
-            cards.Add(card);
+            Cards.Add(card);
+        }
+
+        public void Reset()
+        {
+            Cards.Clear();
         }
     }
 }

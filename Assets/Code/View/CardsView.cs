@@ -10,14 +10,16 @@ namespace Code.View
 {
     public class CardsView : MonoBehaviour
     {
-        [SerializeField] private List<Image> cardImages = new List<Image>(5);
-        [SerializeField] private CardSpriteData cardSpriteData;
+        [SerializeField] public List<Image> cardImages = new List<Image>(5);
+        [SerializeField] public CardSpriteData cardSpriteData;
 
-        private Color onFoldColor = new Color(1f, 1f, 1f, 0.5f); 
-        private Color onTurnColorColor = new Color(1f, 1f, 0.5f, 1f);
-        private Color defaultColor = Color.white; 
+        private Color onFoldColor = new Color(1f, 1f, 1f, 0.5f);
+        private Color onTurnColor = new Color(1f, 1f, 0.5f, 1f);
+        private Color onSelectedColor = new Color(0.5f, 1f, 0.5f, 1f);
+        private Color onAddedCardFromTableColor = new Color(0.7f, 0.7f, 1f, 1f);
+        private Color defaultColor = Color.white;
 
-        public void UpdateCardsView([CanBeNull] List<Card> cards, bool isSecret)
+        public void UpdateCardsView(List<Card> cards, bool isSecret)
         {
             for (int i = 0; i < cards.Count; i++)
             {
@@ -28,7 +30,7 @@ namespace Code.View
                 }
                 else
                 {
-                    cardSprite = cardSpriteData.GetSprite(cards[i].Suit, cards[i].Rank);
+                    cardSprite = cardSpriteData.GetSprite(cards[i].suit, cards[i].rank);
                 }
 
                 if (cardImages[i] != null && cardSprite != null)
@@ -47,17 +49,59 @@ namespace Code.View
             }
         }
         
+        public void HighlightCardsFromTable(List<Card> tableCards, List<Card> playerCards)
+        {
+            foreach (var card in playerCards)
+            {
+                if (tableCards.Contains(card))
+                {
+                    int index = playerCards.IndexOf(card);
+                    if (index >= 0 && index < cardImages.Count)
+                    {
+                        HighlightCardWithOnAddedCardFromTableColor(cardImages[index]);
+                    }
+                }
+            }
+        }
+        
         public void HighlightAllCardsWithOnTurnColor()
         {
             for (int i = 0; i < cardImages.Count; i++)
             {
                 if (cardImages[i] != null)
                 {
-                    SetCardColor(i, onTurnColorColor);
+                    SetCardColor(i, onTurnColor);
                 }
             }
         }
+
+        public void HighlightAllCardsWithOnSelectedColor()
+        {
+            for (int i = 0; i < cardImages.Count; i++)
+            {
+                if (cardImages[i] != null)
+                {
+                    HighlightCardWithOnSelectedColor(cardImages[i]);
+                }
+            }
+        }
+
+        public void HighlightCardWithOnSelectedColor(Image card)
+        {
+            if (card != null)
+            {
+                SetCardColor(cardImages.IndexOf(card), onSelectedColor);
+            }
+        }
         
+        public void HighlightCardWithOnAddedCardFromTableColor(Image card)
+        {
+            if (card != null)
+            {
+                SetCardColor(cardImages.IndexOf(card), onAddedCardFromTableColor);
+            }
+        }
+
         public void HighlightAllCardsWithOnFoldTransparency()
         {
             for (int i = 0; i < cardImages.Count; i++)
@@ -68,7 +112,7 @@ namespace Code.View
                 }
             }
         }
-        
+
         public void SetCardColor(int cardIndex, Color color)
         {
             if (cardImages[cardIndex] != null)
@@ -94,7 +138,7 @@ namespace Code.View
                 cardImages[cardIndex].color = new Color(color.r, color.g, color.b, alpha);
             }
         }
-        
+
         public void ResetAllCardColors()
         {
             for (int i = 0; i < cardImages.Count; i++)
@@ -117,23 +161,32 @@ namespace Code.View
             }
         }
 
-        public void ResetAllCardColorAndTransparency(Color color)
+        public void ResetCardsColorAndTransparency()
         {
             for (int i = 0; i < cardImages.Count; i++)
             {
                 if (cardImages[i] != null)
                 {
-                    ResetCardColorAndTransparency(i, color);
+                    ResetCardColorAndTransparency(i, defaultColor);
                 }
             }
         }
-        
+
         public void ResetCardColor(int cardIndex)
         {
             if (cardImages[cardIndex] != null)
             {
                 Color currentColor = cardImages[cardIndex].color;
                 cardImages[cardIndex].color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, currentColor.a);
+            }
+        }
+        
+        public void ResetCardColor(Image card)
+        {
+            if (card != null)
+            {
+                Color currentColor = card.color;
+                card.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, currentColor.a);
             }
         }
 

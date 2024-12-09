@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using Code.GameEntities.AIPlayer;
 using Code.GameEntities.Player;
 using Code.Infrastructure.CoroutineRunner;
+using UnityEngine.Serialization;
+using Code.GameRules;
+using Code.InputManager_;
 
 namespace Code
 {
@@ -15,9 +18,11 @@ namespace Code
         [SerializeField] private List<PlayerModel> players;
         [SerializeField] private List<AIPlayer> AIPlayers;
         [SerializeField] private PokerTable pokerTable;
-        [SerializeField] private PlayerInputManager playerInputManager;
+        [SerializeField] private InputManager inputManager;
         [SerializeField] private GameManager gameManager;
-        //[SerializeField] private CoroutineRunner coroutineRunner;
+        [SerializeField] private GameLoopManager gameLoopManager;
+        
+        private CombinationComparer combinationComparer = new CombinationComparer(new CombinationEvaluator());
 
         public void Start()
         {
@@ -32,23 +37,11 @@ namespace Code
             }
             
             pokerTable.Initialize(players);
-            dealer.Initialize(players);
-            playerInputManager.Initialize();
-            dealer.AssignRoles();
-            dealer.DistributeStartingChips();
+            dealer.Initialize(players, combinationComparer);
+            inputManager.Initialize();
+            gameLoopManager.Initialize(dealer, gameManager);
 
-            StartCoroutine(StartGameCycle());
-        }
-
-        public IEnumerator StartGameCycle()
-        {
-            yield return StartCoroutine(gameManager.RunBettingRoundForBlinds());
-            
-            dealer.DealCardsToPlayers();
-            yield return StartCoroutine(gameManager.RunFirstBettingRound());
-            dealer.DealFlop();
-            //dealer.DealTurn();
-            //dealer.DealRiver();
+            StartCoroutine(gameLoopManager.StartGameCycle());
         }
     }
 }

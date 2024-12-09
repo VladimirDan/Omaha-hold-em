@@ -1,9 +1,10 @@
 ﻿namespace Code.Enums
 {
-    public enum GameStage
+    public enum BetType
     {
         SmallBlindBet,
         BigBlindBet,
-        RegularAction
+        RegularBet,
+        NonRaiseBet,
     }
 }
