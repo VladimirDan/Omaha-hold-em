@@ -26,7 +26,7 @@ namespace Code.GameEntities
 
         public void Initialize(List<PlayerModel> players, CombinationComparer combinationComparer)
         {
-            this.players = players;
+            this.players = new List<PlayerModel>(players);
             this.combinationComparer = combinationComparer;
             this.potManager = new PotManager(combinationComparer);
 
@@ -84,7 +84,8 @@ namespace Code.GameEntities
             var newSmallBlindPlayer = players
                 .SkipWhile(e => e != smallBlindPlayer)
                 .Skip(1)
-                .First(e => pokerTable.playersInGame.Contains(e));
+                .DefaultIfEmpty(players.First())
+                .FirstOrDefault(e => pokerTable.playersInGame.Contains(e));
 
             newSmallBlindPlayer.playerRoleManager.SetRole(PlayerRole.SmallBlind);
             smallBlindPlayer = newSmallBlindPlayer;
@@ -92,6 +93,7 @@ namespace Code.GameEntities
             var newBigBlindPlayer = pokerTable.playersInGame
                 .SkipWhile(e => e != newSmallBlindPlayer)
                 .Skip(1)
+                .DefaultIfEmpty(pokerTable.playersInGame.First())
                 .First();
 
             newBigBlindPlayer.playerRoleManager.SetRole(PlayerRole.BigBlind);
