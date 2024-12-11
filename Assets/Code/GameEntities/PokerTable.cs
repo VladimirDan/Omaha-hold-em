@@ -15,6 +15,10 @@ namespace Code.GameEntities
         [SerializeField] public ChipsManager currentBet;
         public List<PlayerModel> playersInGame;
         public List<PlayerModel> players;
+
+        public bool isFlopMade = false;
+        public bool isTurnMade = false;
+        public bool isRiverMade = false;
         
         [SerializeField] public CardsView cardsView;
 
@@ -48,6 +52,11 @@ namespace Code.GameEntities
                 playersInGame.Add(player);
             }
             currentBet.Reset();
+            
+            isFlopMade = false;
+            isTurnMade = false;
+            isRiverMade = false;
+            pot = 0;
         }
         
         public void InitializePlayerBets()
@@ -79,7 +88,7 @@ namespace Code.GameEntities
             cardsView.UpdateCardsView(communityCards.Cards, false);
         }
         
-        public void SetPlayerBet(PlayerModel player, int betAmount)
+        public void IncreasePlayerBet(PlayerModel player, int betAmount)
         {
             if (playersBets.ContainsKey(player))
             {

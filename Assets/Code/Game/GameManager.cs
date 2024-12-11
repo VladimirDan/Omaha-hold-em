@@ -78,23 +78,12 @@ namespace Code.GameEntities
         public int FindFirstPlayerIndexToActAfterCardDealing()
         {
             int bigBlindPlayerIndexInAllPlayers =
-                pokerTable.players.FindIndex(player => player.playerRoleManager.role == PlayerRole.BigBlind);
+                pokerTable.players.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
 
             if (bigBlindPlayerIndexInAllPlayers == -1)
                 throw new InvalidOperationException("BigBlind player not found in the table.");
 
-            // for (int i = 1; i <= pokerTable.players.Count; i++)
-            // {
-            //     int currentIndex = (bigBlindPlayerIndexInAllPlayers + i) % pokerTable.players.Count;
-            //     if (pokerTable.playersInGame.Contains(pokerTable.players[currentIndex]))
-            //     {
-            //         return pokerTable.playersInGame.IndexOf(pokerTable.players[currentIndex]);
-            //     }
-            // }
-
             return (bigBlindPlayerIndexInAllPlayers + 1) % pokerTable.playersInGame.Count;
-            
-            throw new InvalidOperationException("No active players found after BigBlind.");
         }
 
         public int FindFirstPlayerIndexToAct()
@@ -102,10 +91,10 @@ namespace Code.GameEntities
             int firstPlayerIndex = -1;
 
             int smallBlindPlayerIndex =
-                pokerTable.playersInGame.FindIndex(player => player.playerRoleManager.role == PlayerRole.SmallBlind);
+                pokerTable.playersInGame.FindIndex(player => player.playerRoleManager.Role == PlayerRole.SmallBlind);
 
             int bigBlindPlayerIndex =
-                pokerTable.playersInGame.FindIndex(player => player.playerRoleManager.role == PlayerRole.BigBlind);
+                pokerTable.playersInGame.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
 
             if (smallBlindPlayerIndex != -1)
             {
@@ -118,7 +107,7 @@ namespace Code.GameEntities
             else
             {
                 int bigBlindPlayerIndexInAllPlayers =
-                    pokerTable.players.FindIndex(player => player.playerRoleManager.role == PlayerRole.BigBlind);
+                    pokerTable.players.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
                 for (int i = bigBlindPlayerIndexInAllPlayers + 1; i < pokerTable.players.Count; i++)
                 {
                     if (pokerTable.playersInGame.Contains(pokerTable.players[i]))
@@ -135,7 +124,7 @@ namespace Code.GameEntities
         {
             var firstPlayer =
                 pokerTable.playersInGame.FirstOrDefault(
-                    player => player.playerRoleManager.role == PlayerRole.SmallBlind);
+                    player => player.playerRoleManager.Role == PlayerRole.SmallBlind);
 
             if (firstPlayer == null)
             {
@@ -148,7 +137,7 @@ namespace Code.GameEntities
             yield return StartCoroutine(WaitForPlayerAction(firstPlayer, BetType.SmallBlindBet));
 
             var secondPlayer =
-                pokerTable.playersInGame.FirstOrDefault(player => player.playerRoleManager.role == PlayerRole.BigBlind);
+                pokerTable.playersInGame.FirstOrDefault(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
 
             if (secondPlayer == null)
             {
@@ -156,7 +145,7 @@ namespace Code.GameEntities
                 yield break;
             }
 
-            Debug.Log($"{secondPlayer.name}, ваш ход! Минимальная ставка: {bigBlind} чипов.");
+            Debug.Log($"{secondPlayer.name}, ваш ход! Минимальная ставка: {bigBlind} фишки.");
             pokerTable.currentBet.TotalChips = Mathf.Max(pokerTable.currentBet.TotalChips, bigBlind);
             yield return StartCoroutine(WaitForPlayerAction(secondPlayer, BetType.BigBlindBet));
         }
@@ -221,6 +210,9 @@ namespace Code.GameEntities
         
         public void RemovePlayersWithoutChips()
         {
+            pokerTable.players.Where(player => player.stackChipsManager.TotalChips <= 0)
+                .ToList().ForEach(player => player.Reset());
+            
             pokerTable.players.RemoveAll(player => player.stackChipsManager.TotalChips <= 0);
         }
     }

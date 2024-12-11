@@ -4,8 +4,9 @@ using Code.GameEntities;
 using Code.GameRules;
 using Code.Enums;
 using System;
+using UnityEngine;
 
-namespace Code.GameLogic
+namespace Code.GameRules
 {
     public class OmahaHandEvaluator
     {
@@ -18,7 +19,7 @@ namespace Code.GameLogic
             combinationComparer = new CombinationComparer(combinationEvaluator);
         }
 
-        public CombinationRank FindBestOmahaCombination(List<Card> tableCards, List<Card> handCards)
+        public CombinationRank FindBestOmahaCombinationRank(List<Card> tableCards, List<Card> handCards)
         {
             if (tableCards.Count != 5 || handCards.Count != 4)
                 throw new ArgumentException("Must be 5 card on table and 4 in hand");
@@ -27,16 +28,16 @@ namespace Code.GameLogic
 
             return combinationComparer.FindStrongestCombinationRank(allCombinations);
         }
-        
+
         public List<Card> FindBestOmahaCombinationCards(List<Card> tableCards, List<Card> handCards)
         {
             if (tableCards.Count != 5 || handCards.Count != 4)
                 throw new ArgumentException("Must be 5 cards on table and 4 in hand");
 
             var allCombinations = GenerateAllValidCombinations(tableCards, handCards);
-
+           
             var bestCombination = combinationComparer.FindStrongestCombinationCards(allCombinations);
-
+            
             return bestCombination;
         }
 
@@ -52,7 +53,6 @@ namespace Code.GameLogic
                 foreach (var handCombo in handCombinations)
                 {
                     var combinedHand = tableCombo.Concat(handCombo).ToList();
-                    if (combinedHand.Count == 5)
                         validHands.Add(combinedHand);
                 }
             }
@@ -67,7 +67,8 @@ namespace Code.GameLogic
             return result;
         }
 
-        private void FindAllCombinations(List<Card> cards, int count, int index, List<Card> current, List<List<Card>> result)
+        private void FindAllCombinations(List<Card> cards, int count, int index, List<Card> current,
+            List<List<Card>> result)
         {
             if (current.Count == count)
             {

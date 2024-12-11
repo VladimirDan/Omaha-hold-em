@@ -6,16 +6,30 @@ namespace Code.View
     public class ChipsView : MonoBehaviour
     {
         [SerializeField] private TMP_Text chipsText;
+        [SerializeField] private GameObject chipsPanel;
 
         public void UpdateChipsDisplay(int chipCount)
         {
-            if (chipsText == null)
+            if (chipCount > 0)
             {
-                Debug.LogError("Chips text field is not assigned.");
-                return;
+                EnableChipsPanel();
+            }
+            else
+            {
+                DisableChipsPanel();
             }
 
             chipsText.text = chipCount.ToString();
+        }
+
+        public void EnableChipsPanel()
+        {
+            chipsPanel.SetActive(true);
+        }
+        
+        public void DisableChipsPanel()
+        {
+            chipsPanel.SetActive(false);
         }
     }
 }

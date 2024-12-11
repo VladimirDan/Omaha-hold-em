@@ -25,8 +25,12 @@ namespace Code.GameEntities
         public IEnumerator StartGameCycle()
         {
             dealer.DistributeStartingChips();
-            while (!CheckOnlyOnePlayerLeft())
+            while (!CheckOnlyOnePlayerLeftInGame())
             {
+                gameManager.RemovePlayersWithoutChips();
+                gameManager.pokerTable.Reset();
+                dealer.Reset();
+                
                 isPokerRoundOver = false;
                 isPotDistributed = false;
                 dealer.AssignRoles();
@@ -80,14 +84,10 @@ namespace Code.GameEntities
                 {
                     yield return null;
                 }
-                
-                gameManager.pokerTable.Reset();
-                dealer.Reset();
-                gameManager.RemovePlayersWithoutChips();
             }
         }
 
-        public bool CheckOnlyOnePlayerLeft()
+        public bool CheckOnlyOnePlayerLeftInGame()
         {
             return gameManager.pokerTable.players.Count == 1;
         }

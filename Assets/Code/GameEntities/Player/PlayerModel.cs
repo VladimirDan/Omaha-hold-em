@@ -27,7 +27,13 @@ namespace Code.GameEntities.Player
         public void Reset()
         {
             playerActionsManager.Reset();
+            playerRoleManager.Reset();
             hand.Reset();
+        }
+
+        public int GetPlayerInGameChipsAmount()
+        {
+            return stackChipsManager.TotalChips + betChipsManager.TotalChips;
         }
     }
 }

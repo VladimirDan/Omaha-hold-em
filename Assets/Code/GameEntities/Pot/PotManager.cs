@@ -34,7 +34,7 @@ namespace Code.GameEntities.Pot
             return playerBetsAndCombinations;
         }
 
-        public List<ChipPot> DivideChipPots(Dictionary<PlayerModel, (int, List<Card>)> playerBetsAndCombinations)
+        public List<ChipPot> DivideChipPots(Dictionary<PlayerModel, (int, List<Card>)> playerBetsAndCombinations, int totalPot)
         {
             var sortedPlayers = playerBetsAndCombinations.OrderBy(x => x.Value.Item1).ToList();
             var chipPots = new List<ChipPot>();
@@ -60,6 +60,14 @@ namespace Code.GameEntities.Pot
                 TotalAmount = minimumBet * sortedPlayers.Count,
                 EligiblePlayers = sortedPlayers.Select(x => x.Key).ToList()
             });
+            
+            int calculatedTotalPot = chipPots.Sum(pot => pot.TotalAmount);
+            if (calculatedTotalPot < totalPot)
+            {
+                int missingAmount = totalPot - calculatedTotalPot;
+                
+                chipPots[^1].TotalAmount += missingAmount;
+            }
 
             return chipPots;
         }
@@ -97,7 +105,9 @@ namespace Code.GameEntities.Pot
         }
 
         public void DistributePotChips(List<PlayerModel> players,
-            Dictionary<PlayerModel, ChipsManager> playersBets, Dictionary<PlayerModel, List<Card>> playersCombinations)
+            Dictionary<PlayerModel, ChipsManager> playersBets, 
+            Dictionary<PlayerModel, List<Card>> playersCombinations,
+            int totalPot)
         {
             var playerBetsAndCombinations = GatherPlayerBetsAndCombinations(players, playersBets, playersCombinations);
 
@@ -107,7 +117,7 @@ namespace Code.GameEntities.Pot
                 return;
             }
 
-            var chipPots = DivideChipPots(playerBetsAndCombinations);
+            var chipPots = DivideChipPots(playerBetsAndCombinations, totalPot);
 
             AllocateChipsFromPots(chipPots, playerBetsAndCombinations);
         }

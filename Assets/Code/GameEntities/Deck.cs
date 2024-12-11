@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Code.Enums;
+using System.Linq;
 
 namespace Code.GameEntities
 {
@@ -28,6 +29,14 @@ namespace Code.GameEntities
             }
         }
 
+        public void ExcludeCardsFromDeck(List<Card> cardsToExclude)
+        {
+            foreach (var card in cardsToExclude)
+            {
+                DrawCard(card);
+            }
+        }
+
         public void Shuffle()
         {
             for (int i = cards.Count - 1; i > 0; i--)
@@ -50,7 +59,20 @@ namespace Code.GameEntities
             return card;
         }
 
+        public Card DrawCard(Card card)
+        {
+            Card foundCard = cards.Find(c => c.Equals(card));
+            if (foundCard == null)
+            {
+                Debug.LogError($"The card {card} is not in the deck!");
+                return null;
+            }
+
+            cards.Remove(foundCard);
+            return foundCard;
+        }
+
+
         public int RemainingCards => cards.Count;
     }
-
 }

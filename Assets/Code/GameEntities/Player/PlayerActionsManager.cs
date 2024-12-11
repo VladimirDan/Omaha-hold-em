@@ -62,7 +62,7 @@ namespace Code.GameEntities.Player
         {
             if (!isRaiseRound)
             {
-                Debug.LogError($"{currentPlayer.name} cannot raise because it's not raise turn.");
+                Debug.Log($"{currentPlayer.name} cannot raise because it's not raise turn.");
                 return false;
             }
 
@@ -97,7 +97,7 @@ namespace Code.GameEntities.Player
             if (callAmount > 0)
             {
                 currentPlayer.stackChipsManager.RemoveChips(callAmount);
-                pokerTable.SetPlayerBet(currentPlayer, pokerTable.currentBet.TotalChips);
+                pokerTable.IncreasePlayerBet(currentPlayer, pokerTable.currentBet.TotalChips);
                 pokerTable.AddToPot(callAmount);
                 Debug.Log(
                     $"{currentPlayer.name} has called with {callAmount} chips. Remaining chips: {currentPlayer.stackChipsManager.TotalChips}");
@@ -110,13 +110,21 @@ namespace Code.GameEntities.Player
             hasMadeAction = true;
         }
 
+        public int GetCallAmount(PlayerModel currentPlayer)
+        {
+            int currentPlayerBet = pokerTable.GetPlayerBet(currentPlayer);
+            int callAmount = pokerTable.currentBet.TotalChips - currentPlayerBet;
+
+            return callAmount;
+        }
+
         public void Raise(PlayerModel currentPlayer, int raiseAmount)
         {
             int additionalAmount = raiseAmount - pokerTable.GetPlayerBet(currentPlayer);
 
             currentPlayer.stackChipsManager.RemoveChips(additionalAmount);
             pokerTable.currentBet.TotalChips = raiseAmount;
-            pokerTable.SetPlayerBet(currentPlayer, raiseAmount);
+            pokerTable.IncreasePlayerBet(currentPlayer, raiseAmount);
             pokerTable.AddToPot(additionalAmount);
             Debug.Log(
                 $"{currentPlayer.name} has raised to {raiseAmount}. Remaining chips: {currentPlayer.stackChipsManager.TotalChips}");
@@ -134,7 +142,7 @@ namespace Code.GameEntities.Player
         {
             int currentBalance = currentPlayer.stackChipsManager.TotalChips;
             currentPlayer.stackChipsManager.RemoveChips(currentBalance);
-            pokerTable.SetPlayerBet(currentPlayer, currentBalance);
+            pokerTable.IncreasePlayerBet(currentPlayer, currentBalance + pokerTable.GetPlayerBet(currentPlayer));
             pokerTable.AddToPot(currentBalance);
             Debug.Log($"{currentPlayer.name} is all in with {currentBalance} chips.");
 
@@ -250,6 +258,20 @@ namespace Code.GameEntities.Player
             foreach (Card card in cardSelectionController.selectedCards)
             {
                 if(card == null) return false;
+            }
+
+            return true;
+        }
+
+        public bool IsEveryOpponentInAllIn(PlayerModel currentPlayer)
+        {
+            foreach (var player in pokerTable.playersInGame)
+            {
+                if(player == currentPlayer) continue;
+                if (player.stackChipsManager.TotalChips != 0)
+                {
+                    return false;
+                }
             }
 
             return true;

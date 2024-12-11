@@ -11,17 +11,35 @@ namespace Code.GameEntities.Player
     {
         [SerializeField] public BlindRoleImageManager blindRoleImageManager;
 
-        public PlayerRole role;
+        private PlayerRole role;
 
+        public PlayerRole Role
+        {
+            get => role;
+            set
+            {
+                if (role != value) 
+                {
+                    role = value;
+                    blindRoleImageManager.UpdateRoleImage(role); 
+                }
+            }
+        }
+
+        public void Reset()
+        {
+            Role = PlayerRole.Regular;
+        }
+        
         public void SetRole(PlayerRole newRole)
         {
-            role = newRole;
-            UpdateRoleImage();
+            Role = newRole;
+            //UpdateRoleImage();
         }
 
         private void UpdateRoleImage()
         {
-            blindRoleImageManager.UpdateRoleImage(role);
+            blindRoleImageManager.UpdateRoleImage(Role);
         }
     }
 }

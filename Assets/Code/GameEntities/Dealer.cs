@@ -42,7 +42,7 @@ namespace Code.GameEntities
 
         public void DealCardsToPlayers()
         {
-            if (players.Count != 5)
+            if (pokerTable.playersInGame.Count < 1)
             {
                 Debug.LogError("The dealer needs 5 players!");
                 return;
@@ -50,13 +50,11 @@ namespace Code.GameEntities
 
             deck.Shuffle();
 
-            for (int i = 0; i < players.Count; i++)
+            for (int i = 0; i < pokerTable.playersInGame.Count; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    Debug.Log(players[i].hand.cardSet.Cards.Count);
-                    Debug.Log("maxCardsCount = " + players[i].hand.cardSet.maxCardsCount);
-                    players[i].hand.AddCard(deck.DrawCard());
+                    pokerTable.playersInGame[i].hand.AddCard(deck.DrawCard());
                 }
                 //Debug.Log(playerHands[i].ToString());
             }
@@ -64,47 +62,45 @@ namespace Code.GameEntities
 
         public void AssignRoles()
         {
-            if (players.Count < 2)
+            if (pokerTable.playersInGame.Count < 2)
             {
                 Debug.LogError("Not enough players to assign Small Blind and Big Blind.");
                 return;
             }
-
-            bool smallBlindAssigned = false;
-            for (int i = 0; i < players.Count; i++)
+            
+            if (smallBlindPlayer == null)
             {
-                var currentPlayer = players[i];
+                pokerTable.playersInGame[0].playerRoleManager.SetRole(PlayerRole.SmallBlind);
+                smallBlindPlayer = pokerTable.playersInGame[0];
 
-                if (currentPlayer.playerRoleManager.role == PlayerRole.SmallBlind)
-                {
-                    currentPlayer.playerRoleManager.SetRole(PlayerRole.Regular);
-                    smallBlindPlayer = currentPlayer;
+                pokerTable.playersInGame[1].playerRoleManager.SetRole(PlayerRole.BigBlind);
+                bigBlindPlayer = pokerTable.playersInGame[1];
 
-                    int smallBlindIndex = i;
-                    int nextIndex = (smallBlindIndex + 1) % players.Count;
-                    players[nextIndex].playerRoleManager.SetRole(PlayerRole.SmallBlind);
-                    smallBlindAssigned = true;
-                    smallBlindPlayer = players[nextIndex];
-
-                    nextIndex = (nextIndex + 1) % players.Count;
-                    players[nextIndex].playerRoleManager.SetRole(PlayerRole.BigBlind);
-                    break;
-                }
+                return;
             }
+            
+            smallBlindPlayer.playerRoleManager.SetRole(PlayerRole.Regular);
 
-            if (!smallBlindAssigned)
-            {
-                players[0].playerRoleManager.SetRole(PlayerRole.SmallBlind);
-                smallBlindPlayer = players[0];
+            var newSmallBlindPlayer = players
+                .SkipWhile(e => e != smallBlindPlayer)
+                .Skip(1)
+                .First(e => pokerTable.playersInGame.Contains(e));
 
-                players[1].playerRoleManager.SetRole(PlayerRole.BigBlind);
-                bigBlindPlayer = players[1];
-            }
+            newSmallBlindPlayer.playerRoleManager.SetRole(PlayerRole.SmallBlind);
+            smallBlindPlayer = newSmallBlindPlayer;
+
+            var newBigBlindPlayer = pokerTable.playersInGame
+                .SkipWhile(e => e != newSmallBlindPlayer)
+                .Skip(1)
+                .First();
+
+            newBigBlindPlayer.playerRoleManager.SetRole(PlayerRole.BigBlind);
+            bigBlindPlayer = newBigBlindPlayer;
         }
-
+        
         public void DistributeStartingChips()
         {
-            foreach (var player in players)
+            foreach (var player in pokerTable.playersInGame)
             {
                 player.stackChipsManager.AddChips(startingChips);
             }
@@ -125,6 +121,8 @@ namespace Code.GameEntities
             {
                 pokerTable.AddCard(deck.DrawCard());
             }
+
+            pokerTable.isFlopMade = true;
         }
 
         public void DealTurn()
@@ -137,6 +135,8 @@ namespace Code.GameEntities
             }
 
             pokerTable.AddCard(deck.DrawCard());
+
+            pokerTable.isTurnMade = true;
         }
 
         public void DealRiver()
@@ -149,11 +149,15 @@ namespace Code.GameEntities
             }
 
             pokerTable.AddCard(deck.DrawCard());
+
+            pokerTable.isRiverMade = true;
         }
 
         public void DistributePotChips()
         {
-            potManager.DistributePotChips(players, pokerTable.playersBets, pokerTable.playersCombinations);
+            potManager.DistributePotChips(pokerTable.playersInGame, pokerTable.playersBets,
+                pokerTable.playersCombinations,
+                pokerTable.pot);
             pokerTable.ResetPlayerBets();
         }
     }

@@ -30,13 +30,12 @@ namespace Code
             {
                 players[i].Initialize();
             }
-            
             for (int i = 0; i < AIPlayers.Count; i++)
             {
-                AIPlayers[i].Initialize();
+                AIPlayers[i].Initialize(pokerTable);
             }
-            
             pokerTable.Initialize(players);
+            
             dealer.Initialize(players, combinationComparer);
             inputManager.Initialize();
             gameLoopManager.Initialize(dealer, gameManager);

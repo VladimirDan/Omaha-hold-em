@@ -1,28 +1,39 @@
-﻿using System.Collections;
+﻿using Code.GameEntities.AIPlayer.AIDecisionStrategy;
+using System.Collections;
 using System.Collections.Generic;
 using Code.GameEntities.Player;
 using UnityEngine;
 using Code.Enums;
-using Code.GameLogic;
-using System.Collections.Generic;
+using Code.GameRules;
+using Code.GameAI;
+using Code.GameEntities.AIPlayer.AIDecisionStrategy.Strategies;
 using System.Linq;
 using Code.GameEntities;
+using System;
 
 namespace Code.GameEntities.AIPlayer
 {
     public class AIPlayer : MonoBehaviour
     {
         [SerializeField] private PlayerModel player;
+        [SerializeField] private PokerTable pokerTable;
         private OmahaHandEvaluator omahaHandEvaluator = new OmahaHandEvaluator();
+        private PokerProbabilityEvaluator pokerProbabilityEvaluator = new PokerProbabilityEvaluator();
         private int waitTime = 0;
+        [SerializeField] private IPlayerDecisionStrategy playerDecisionStrategy;
+        private int simulationsCount = 100;
+        [SerializeField] private MatchOutcomeProbabilities outcomeProbabilities;
+        public string strategyType;
 
-        public void Initialize()
+        public void Initialize(PokerTable pokerTable)
         {
             if (player != null && player.playerActionsManager != null)
             {
                 player.playerActionsManager.OnPlayerBetTurn += OnPlayerBetTurn;
                 player.playerActionsManager.OnCombinationRevealTurn += OnCombinationRevealTurn;
             }
+
+            this.pokerTable = pokerTable;
         }
 
         private void OnDestroy()
@@ -35,28 +46,7 @@ namespace Code.GameEntities.AIPlayer
 
         private void OnPlayerBetTurn(BetType betType)
         {
-            switch (betType)
-            {
-                case BetType.SmallBlindBet:
-                    StartCoroutine(ActOnSBBlind());
-                    break;
-
-                case BetType.BigBlindBet:
-                    StartCoroutine(ActOnSBBlind());
-                    break;
-
-                case BetType.RegularBet:
-                    StartCoroutine(ActOnSBBlind());
-                    break;
-
-                case BetType.NonRaiseBet:
-                    StartCoroutine(ActOnSBBlind());
-                    break;
-
-                default:
-                    Debug.LogError("Unknown game stage.");
-                    break;
-            }
+            StartCoroutine(MakeDecision(betType));
         }
 
         private void OnCombinationRevealTurn()
@@ -67,7 +57,7 @@ namespace Code.GameEntities.AIPlayer
         public IEnumerator SubmitBestCombination()
         {
             yield return new WaitForSeconds(waitTime);
-            
+
             player.playerActionsManager.cardSelectionController.selectedCards = FindBestCombination();
             player.playerActionsManager.SubmitCombination(player);
         }
@@ -88,22 +78,83 @@ namespace Code.GameEntities.AIPlayer
 
             if (pokerTable.GetPlayerBet(player) < currentBet)
             {
-                Debug.Log($"{player.name} делает call.");
                 player.playerActionsManager.Call(player);
             }
             else
             {
                 player.playerActionsManager.Check(player);
             }
-
-            //Debug.Log($"{player.name} завершил свой ход.");
         }
 
         public IEnumerator AlwaysFold()
         {
             yield return new WaitForSeconds(waitTime);
-            
+
             player.playerActionsManager.Fold(player);
+        }
+
+        public IEnumerator MakeDecision(BetType betType)
+        {
+            yield return new WaitForSeconds(waitTime);
+
+            int opponentCount = pokerTable.playersInGame.Count - 1;
+
+            outcomeProbabilities = pokerProbabilityEvaluator.SimulateMatchOutcomes(
+                player,
+                pokerTable.playersInGame,
+                pokerTable.communityCards.Cards,
+                opponentCount,
+                simulationsCount);
+
+            float chanceToWinOrTie = outcomeProbabilities.TieChance + outcomeProbabilities.WinChance;
+            playerDecisionStrategy = SelectStrategy(chanceToWinOrTie, player, betType);
+            string fullTypeName = playerDecisionStrategy.GetType().ToString();
+            strategyType = fullTypeName.Substring(fullTypeName.LastIndexOf('.') + 1);
+            playerDecisionStrategy.ExecuteStrategy(pokerTable, player, chanceToWinOrTie);
+        }
+
+        public IPlayerDecisionStrategy SelectStrategy(float chanceToWin, PlayerModel player, BetType betType)
+        {
+            bool isBetOverThirtyPercent = (float)player.betChipsManager.TotalChips /
+                (player.stackChipsManager.TotalChips + player.betChipsManager.TotalChips) > 0.3f;
+
+            if (betType == BetType.BigBlindBet || betType == BetType.SmallBlindBet)
+            {
+                return new BlindStageStrategy();
+            }
+
+            if (chanceToWin >= 0.5f)
+            {
+                return new OpponentGrindingStrategy();
+            }
+
+            if (chanceToWin >= 0.1f && chanceToWin <= 0.2f)
+            {
+                return new PassiveStrategy();
+            }
+
+            if (playerDecisionStrategy is BluffStrategy || (chanceToWin < 0.1f && UnityEngine.Random.value < 0.1f))
+            {
+                return new BluffStrategy();
+            }
+
+            if (chanceToWin < 0.1f)
+            {
+                return new ChipDefenseStrategy();
+            }
+
+            if (chanceToWin >= 0.2f && chanceToWin < 0.6f)
+            {
+                return new MixedStrategy();
+            }
+
+            if (chanceToWin >= 0.2f && chanceToWin < 0.3f && isBetOverThirtyPercent)
+            {
+                return new GreedyStrategy();
+            }
+
+            Debug.LogError("Cant chose strat");
+            return null;
         }
     }
 }

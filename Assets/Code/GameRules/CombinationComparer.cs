@@ -49,12 +49,12 @@ namespace Code.GameRules
 
         public List<Card> FindStrongestCombinationCards(List<List<Card>> combinations)
         {
-            CombinationRank bestHandRank = CombinationRank.HighCard;
-            List<Card> bestCombination = null;
+            CombinationRank bestHandRank = combinationEvaluator.EvaluateBestCardCombinationRank(combinations[0]);
+            List<Card> bestCombination = combinations[0];
 
             foreach (var combination in combinations)
             {
-                if (combination == null || !combination.Any())
+                if (combination == null || combination.Count != 5)
                 {
                     Debug.LogWarning("Skipping invalid or empty combination.");
                     continue;
@@ -74,6 +74,11 @@ namespace Code.GameRules
                         bestCombination = combination;
                     }
                 }
+            }
+
+            if (bestCombination == null)
+            {
+                Debug.LogWarning("Strongest C");
             }
 
             return bestCombination;
