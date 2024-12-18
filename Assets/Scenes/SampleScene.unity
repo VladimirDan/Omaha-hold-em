@@ -6220,7 +6220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb136f22bb843c2b17d0e6f9f2c9251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSecret: 1
+  isSecret: 0
   cardsView: {fileID: 1024565633}
 --- !u!114 &1239237520
 MonoBehaviour:
@@ -9118,7 +9118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb136f22bb843c2b17d0e6f9f2c9251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSecret: 1
+  isSecret: 0
   cardsView: {fileID: 526244902}
 --- !u!114 &1752325038
 MonoBehaviour:
@@ -10002,7 +10002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb136f22bb843c2b17d0e6f9f2c9251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSecret: 1
+  isSecret: 0
   cardsView: {fileID: 2095986236}
 --- !u!114 &1866501746
 MonoBehaviour:
@@ -10174,7 +10174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb136f22bb843c2b17d0e6f9f2c9251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSecret: 1
+  isSecret: 0
   cardsView: {fileID: 1503412811}
 --- !u!114 &1912384668
 MonoBehaviour:

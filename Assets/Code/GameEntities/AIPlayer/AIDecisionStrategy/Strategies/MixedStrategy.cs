@@ -10,6 +10,7 @@ namespace Code.GameEntities.AIPlayer.AIDecisionStrategy.Strategies
         {
             float raisePercent = 5;
             int raiseAmount = Mathf.RoundToInt((raisePercent / 100f) * player.stackChipsManager.TotalChips + pokerTable.currentBet.TotalChips);
+            int maxCallAmount = Mathf.RoundToInt(chanceToWin * (player.betChipsManager.TotalChips + player.stackChipsManager.TotalChips));
 
             if (Random.value < 0.1f && 
                 chanceToWin > 0.4f &&
@@ -25,7 +26,7 @@ namespace Code.GameEntities.AIPlayer.AIDecisionStrategy.Strategies
             {
                 player.playerActionsManager.Raise(player, raiseAmount);
             }
-            else if (player.playerActionsManager.CanCall(player))
+            else if (player.playerActionsManager.CanCall(player) && pokerTable.currentBet.TotalChips < maxCallAmount)
             {
                 player.playerActionsManager.Call(player);
             }
@@ -33,9 +34,13 @@ namespace Code.GameEntities.AIPlayer.AIDecisionStrategy.Strategies
             {
                 player.playerActionsManager.Check(player);
             }
-            else if (pokerTable.currentBet.TotalChips != player.betChipsManager.TotalChips)
+            else if (pokerTable.currentBet.TotalChips != player.betChipsManager.TotalChips && pokerTable.currentBet.TotalChips < maxCallAmount)
             {
                 player.playerActionsManager.AllIn(player);
+            }
+            else if(player.playerActionsManager.CanFold(player))
+            {
+                player.playerActionsManager.Fold(player);
             }
             else
             {

@@ -98,8 +98,8 @@ namespace Code.GameRules
                 return 0;
             }
 
-            var sortedHand1 = combination1.OrderByDescending(c => (int)c.rank).ToList();
-            var sortedHand2 = combination2.OrderByDescending(c => (int)c.rank).ToList();
+            var sortedHand1 = SortCardsByRankAndCount(combination1);
+            var sortedHand2 = SortCardsByRankAndCount(combination2);
 
             for (int i = 0; i < Mathf.Min(sortedHand1.Count, sortedHand2.Count); i++)
             {
@@ -111,5 +111,27 @@ namespace Code.GameRules
             
             return 0;
         }
+        
+        private List<Card> SortCardsByRankAndCount(List<Card> hand)
+        {
+            var sortedHand = hand.OrderByDescending(c => (int)c.rank).ToList();
+
+            var groupedCards = sortedHand
+                .GroupBy(c => (int)c.rank)
+                .Select(g => new
+                {
+                    Rank = g.Key,
+                    Count = g.Count(),
+                    Cards = g.ToList()
+                })
+                .OrderByDescending(g => g.Count)
+                .ThenByDescending(g => g.Rank)
+                .ToList();
+
+            var sortedList = groupedCards.SelectMany(g => g.Cards).ToList();
+
+            return sortedList;
+        }
+
     }
 }

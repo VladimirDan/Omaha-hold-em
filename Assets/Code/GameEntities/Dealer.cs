@@ -78,26 +78,44 @@ namespace Code.GameEntities
 
                 return;
             }
+
+            // var newSmallBlindPlayer = players
+            //     .SkipWhile(e => e != smallBlindPlayer)
+            //     .Skip(1)
+            //     .DefaultIfEmpty(players.First())
+            //     .FirstOrDefault(e => pokerTable.playersInGame.Contains(e));
             
-            smallBlindPlayer.playerRoleManager.SetRole(PlayerRole.Regular);
+          
+                int smallBlindPlayerIndexInAllPlayers = pokerTable.players.IndexOf(smallBlindPlayer);
+                
+                smallBlindPlayer.playerRoleManager.SetRole(PlayerRole.Regular);
+                
+                for (int i = smallBlindPlayerIndexInAllPlayers + 1; i < (pokerTable.players.Count + smallBlindPlayerIndexInAllPlayers); i++)
+                {
+                    int index = i % pokerTable.players.Count;
+                    if (pokerTable.playersInGame.Contains(pokerTable.players[index]))
+                    {
+                        int indexOfPlayerInGame = pokerTable.playersInGame.IndexOf(pokerTable.players[index]);
+                        smallBlindPlayer = pokerTable.playersInGame[indexOfPlayerInGame];
+                        smallBlindPlayer.playerRoleManager.SetRole(PlayerRole.SmallBlind);
+                        bigBlindPlayer = pokerTable.playersInGame[(indexOfPlayerInGame + 1) % pokerTable.playersInGame.Count];
+                        bigBlindPlayer.playerRoleManager.SetRole(PlayerRole.BigBlind);
+                        return;
+                    }
+                }
+            
 
-            var newSmallBlindPlayer = players
-                .SkipWhile(e => e != smallBlindPlayer)
-                .Skip(1)
-                .DefaultIfEmpty(players.First())
-                .FirstOrDefault(e => pokerTable.playersInGame.Contains(e));
-
-            newSmallBlindPlayer.playerRoleManager.SetRole(PlayerRole.SmallBlind);
-            smallBlindPlayer = newSmallBlindPlayer;
-
-            var newBigBlindPlayer = pokerTable.playersInGame
-                .SkipWhile(e => e != newSmallBlindPlayer)
-                .Skip(1)
-                .DefaultIfEmpty(pokerTable.playersInGame.First())
-                .First();
-
-            newBigBlindPlayer.playerRoleManager.SetRole(PlayerRole.BigBlind);
-            bigBlindPlayer = newBigBlindPlayer;
+            // newSmallBlindPlayer.playerRoleManager.SetRole(PlayerRole.SmallBlind);
+            // smallBlindPlayer = newSmallBlindPlayer;
+            //
+            // var newBigBlindPlayer = pokerTable.playersInGame
+            //     .SkipWhile(e => e != newSmallBlindPlayer)
+            //     .Skip(1)
+            //     .DefaultIfEmpty(pokerTable.playersInGame.First())
+            //     .First();
+            //
+            // newBigBlindPlayer.playerRoleManager.SetRole(PlayerRole.BigBlind);
+            // bigBlindPlayer = newBigBlindPlayer;
         }
         
         public void DistributeStartingChips()

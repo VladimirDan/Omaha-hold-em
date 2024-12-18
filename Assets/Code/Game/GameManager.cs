@@ -77,13 +77,37 @@ namespace Code.GameEntities
 
         public int FindFirstPlayerIndexToActAfterCardDealing()
         {
-            int bigBlindPlayerIndexInAllPlayers =
-                pokerTable.players.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
+            // int bigBlindPlayerIndexInAllPlayers =
+            //     pokerTable.players.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
+            //
+            // if (bigBlindPlayerIndexInAllPlayers == -1)
+            //     throw new InvalidOperationException("BigBlind player not found in the table.");
+            //
+            // return (bigBlindPlayerIndexInAllPlayers + 1) % pokerTable.playersInGame.Count;
+            int firstPlayerIndex = -1;
 
-            if (bigBlindPlayerIndexInAllPlayers == -1)
-                throw new InvalidOperationException("BigBlind player not found in the table.");
+            int bigBlindPlayerIndex =
+                pokerTable.playersInGame.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
 
-            return (bigBlindPlayerIndexInAllPlayers + 1) % pokerTable.playersInGame.Count;
+            if (bigBlindPlayerIndex != -1)
+            {
+                firstPlayerIndex = (bigBlindPlayerIndex + 1) % pokerTable.playersInGame.Count;
+            }
+            else
+            {
+                int bigBlindPlayerIndexInAllPlayers =
+                    pokerTable.players.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
+                for (int i = bigBlindPlayerIndexInAllPlayers + 1; i < (pokerTable.players.Count + bigBlindPlayerIndexInAllPlayers); i++)
+                {
+                    int index = i % pokerTable.players.Count;
+                    if (pokerTable.playersInGame.Contains(pokerTable.players[index]))
+                    {
+                        firstPlayerIndex = (pokerTable.playersInGame.IndexOf(pokerTable.players[index]) + 1) % pokerTable.playersInGame.Count;
+                    }
+                }
+            }
+
+            return firstPlayerIndex;
         }
 
         public int FindFirstPlayerIndexToAct()
@@ -108,11 +132,12 @@ namespace Code.GameEntities
             {
                 int bigBlindPlayerIndexInAllPlayers =
                     pokerTable.players.FindIndex(player => player.playerRoleManager.Role == PlayerRole.BigBlind);
-                for (int i = bigBlindPlayerIndexInAllPlayers + 1; i < pokerTable.players.Count; i++)
+                for (int i = bigBlindPlayerIndexInAllPlayers + 1; i < (pokerTable.players.Count + bigBlindPlayerIndexInAllPlayers); i++)
                 {
-                    if (pokerTable.playersInGame.Contains(pokerTable.players[i]))
+                    int index = i % pokerTable.players.Count;
+                    if (pokerTable.playersInGame.Contains(pokerTable.players[index]))
                     {
-                        return pokerTable.playersInGame.IndexOf(pokerTable.players[i]);
+                        return pokerTable.playersInGame.IndexOf(pokerTable.players[index]);
                     }
                 }
             }

@@ -122,20 +122,20 @@ namespace Code.GameEntities.AIPlayer
             {
                 return new BlindStageStrategy();
             }
+            
+            if (playerDecisionStrategy is BluffStrategy || (chanceToWin < 0.1f && UnityEngine.Random.value < 0.1f))
+            {
+                return new BluffStrategy();
+            }
 
             if (chanceToWin >= 0.5f)
             {
                 return new OpponentGrindingStrategy();
             }
 
-            if (chanceToWin >= 0.1f && chanceToWin <= 0.2f)
+            if (chanceToWin >= 0.1f && chanceToWin <= 0.3f)
             {
                 return new PassiveStrategy();
-            }
-
-            if (playerDecisionStrategy is BluffStrategy || (chanceToWin < 0.1f && UnityEngine.Random.value < 0.1f))
-            {
-                return new BluffStrategy();
             }
 
             if (chanceToWin < 0.1f)
@@ -143,7 +143,7 @@ namespace Code.GameEntities.AIPlayer
                 return new ChipDefenseStrategy();
             }
 
-            if (chanceToWin >= 0.2f && chanceToWin < 0.6f)
+            if (chanceToWin >= 0.3f && chanceToWin < 0.5f)
             {
                 return new MixedStrategy();
             }

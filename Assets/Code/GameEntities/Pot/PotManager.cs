@@ -4,6 +4,7 @@ using UnityEngine;
 using Code.Enums;
 using System.Linq;
 using Code.GameRules;
+using System;
 
 namespace Code.GameEntities.Pot
 {
@@ -17,7 +18,8 @@ namespace Code.GameEntities.Pot
         }
 
         public Dictionary<PlayerModel, (int, List<Card>)> GatherPlayerBetsAndCombinations(
-            List<PlayerModel> players, Dictionary<PlayerModel, ChipsManager> playersBets, Dictionary<PlayerModel, List<Card>> playersCombinations)
+            List<PlayerModel> players, Dictionary<PlayerModel, ChipsManager> playersBets,
+            Dictionary<PlayerModel, List<Card>> playersCombinations)
         {
             var playerBetsAndCombinations = new Dictionary<PlayerModel, (int, List<Card>)>();
 
@@ -34,45 +36,44 @@ namespace Code.GameEntities.Pot
             return playerBetsAndCombinations;
         }
 
-        public List<ChipPot> DivideChipPots(Dictionary<PlayerModel, (int, List<Card>)> playerBetsAndCombinations, int totalPot)
+        public List<ChipPot> DivideChipPots(
+            Dictionary<PlayerModel, (int, List<Card>)> playerBetsAndCombinations, int totalPot)
         {
             var sortedPlayers = playerBetsAndCombinations.OrderBy(x => x.Value.Item1).ToList();
             var chipPots = new List<ChipPot>();
-
-            int minimumBet = sortedPlayers[0].Value.Item1;
+            int previousBet = 0;
 
             foreach (var player in sortedPlayers)
             {
                 int currentBet = player.Value.Item1;
-                if (currentBet > minimumBet)
+
+                if (currentBet > previousBet)
                 {
+                    int eligiblePlayersCount = sortedPlayers.Count(x => x.Value.Item1 >= currentBet);
+
                     chipPots.Add(new ChipPot
                     {
-                        TotalAmount = (currentBet - minimumBet) * sortedPlayers.Count(x => x.Value.Item1 >= currentBet),
-                        EligiblePlayers = sortedPlayers.Where(x => x.Value.Item1 >= currentBet).Select(x => x.Key).ToList()
+                        TotalAmount = (currentBet - previousBet) * eligiblePlayersCount,
+                        EligiblePlayers = sortedPlayers.Where(x => x.Value.Item1 >= currentBet).Select(x => x.Key)
+                            .ToList()
                     });
-                    minimumBet = currentBet;
+
+                    previousBet = currentBet;
                 }
             }
 
-            chipPots.Insert(0, new ChipPot
-            {
-                TotalAmount = minimumBet * sortedPlayers.Count,
-                EligiblePlayers = sortedPlayers.Select(x => x.Key).ToList()
-            });
-            
             int calculatedTotalPot = chipPots.Sum(pot => pot.TotalAmount);
             if (calculatedTotalPot < totalPot)
             {
                 int missingAmount = totalPot - calculatedTotalPot;
-                
-                chipPots[^1].TotalAmount += missingAmount;
+                chipPots.Last().TotalAmount += missingAmount;
             }
 
             return chipPots;
         }
 
-        public void AllocateChipsFromPots(List<ChipPot> chipPots,
+        public void AllocateChipsFromPots(
+            List<ChipPot> chipPots,
             Dictionary<PlayerModel, (int, List<Card>)> playerBetsAndCombinations)
         {
             foreach (var pot in chipPots)
@@ -87,8 +88,11 @@ namespace Code.GameEntities.Pot
 
                     if (winners.Count > 0)
                     {
-                        int payoutShare = pot.TotalAmount / winners.Count;
-                        int remainingChips = pot.TotalAmount % winners.Count;
+                        int maxPayoutPerPlayer = pot.EligiblePlayers.Min(player =>
+                            playerBetsAndCombinations[player].Item1 * pot.EligiblePlayers.Count);
+
+                        int payoutShare = Math.Min(pot.TotalAmount / winners.Count, maxPayoutPerPlayer);
+                        int remainingChips = pot.TotalAmount - payoutShare * winners.Count;
 
                         foreach (var winner in winners)
                         {
@@ -97,15 +101,16 @@ namespace Code.GameEntities.Pot
 
                         if (remainingChips > 0)
                         {
-                            winners[Random.Range(0, winners.Count)].stackChipsManager.TotalChips += remainingChips;
+                            winners[UnityEngine.Random.Range(0, winners.Count)].stackChipsManager.TotalChips += remainingChips;
                         }
                     }
                 }
             }
         }
 
-        public void DistributePotChips(List<PlayerModel> players,
-            Dictionary<PlayerModel, ChipsManager> playersBets, 
+        public void DistributePotChips(
+            List<PlayerModel> players,
+            Dictionary<PlayerModel, ChipsManager> playersBets,
             Dictionary<PlayerModel, List<Card>> playersCombinations,
             int totalPot)
         {
